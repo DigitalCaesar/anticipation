@@ -39,7 +39,7 @@ steps:
     inputs:
       versionSpec: 6.0.x
   # Get Signing Certificate
-  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'),eq(variables['Build.SourceBranch'], 'refs/heads/release/*')) }}:
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'),eq(variables['Build.SourceBranch'], 'refs/heads/release/')) }}:
     - template:  Package/JobSigning.yml@templates
       parameters: 
         CertificateName: 'Digital Caesar LLC.snk'
