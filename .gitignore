@@ -396,4 +396,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/Digital Caesar LLC.snk
+
+# Key Files
+**/*.snk
+**/*.pfx
+
+# Artifacts
+.artifacts
