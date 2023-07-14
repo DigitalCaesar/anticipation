@@ -20,31 +20,22 @@ string PACKAGE_OUTPUT_DIR = $"{ARTIFACT_OUTPUT_DIR}/package";
 if(BuildSystem.IsRunningOnAzurePipelines)
 {
     buildId = BuildSystem.AzurePipelines.Environment.Build.Id.ToString();
-    branchName = BuildSystem.AzurePipelines.Environment.Repository.SourceBranchName;
+    branchName = BuildSystem.AzurePipelines.Environment.Repository.SourceBranch;
 }
 
-switch(branchName) {
-    case "main":
+if(branchName.StartsWith("refs/heads/main"))
         IsRelease = true;
         configuration = "Release";
         versionSuffix = $"";
-        break;
-    case "release":
+if(branchName.StartsWith("refs/heads/release"))
         IsRelease = true;
         configuration = "Release";
         versionSuffix = $"prerelease.{buildId}";
-        break;
-    case "develop":
+if(branchName.StartsWith("refs/heads/develop"))
         IsRelease = false;
         configuration = "Debug";
         versionSuffix = $"alpha.{buildId}";
         break;
-    default:
-        IsRelease = false;
-        configuration = "Debug";
-        versionSuffix = $"local.{buildId}";
-        break;
-}
 
 Task("Setup")
   .Does(() => {
