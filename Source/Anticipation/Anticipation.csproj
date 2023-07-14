@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package Settings">
+    <PackageId>Anticipation</PackageId>
+    <Title>Anticipation</Title>
+    <Summary></Summary>
+    <Description></Description>
+    <PackageTags>Errors;Error;Error Handling;Error Handling Strategy;Meaningful Errors;</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Release All" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Digital Caesar LLC.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+</Project>
