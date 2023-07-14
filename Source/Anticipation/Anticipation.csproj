@@ -7,8 +7,11 @@
   <PropertyGroup Label="Package Settings">
     <PackageId>Anticipation</PackageId>
     <Title>Anticipation</Title>
-    <Summary></Summary>
-    <Description></Description>
+    <Summary>Anticipation is a library to promote proactive error management over reactive exception handling.</Summary>
+    <Description>
+      Anticipation is a library to promote proactive error management over reactive exception handling.
+      Anticipation include an Error type for capturing issues raised by your code, a collection type for immutable lists of Errors, and a converter for converting exceptions into Errors.
+    </Description>
     <PackageTags>Errors;Error;Error Handling;Error Handling Strategy;Meaningful Errors;</PackageTags>
   </PropertyGroup>
 
