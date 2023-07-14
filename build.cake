@@ -2,10 +2,11 @@
 #addin nuget:?package=Cake.AzureDevOps&version=3.0.0
 #tool dotnet:?package=dotnet-reportgenerator-globaltool&version=5.1.19
 
+var target = Argument("target", "Default");
 string solution = Argument("solution", "./Source/Anticipation.sln");
 string branchName = Argument("branchName", "local");
+string fullBranchName = Argument("fullBranchName", "local");
 
-var target = Argument("target", "Default");
 
 string buildId = "0";
 bool IsRelease = false;
@@ -20,22 +21,39 @@ string PACKAGE_OUTPUT_DIR = $"{ARTIFACT_OUTPUT_DIR}/package";
 if(BuildSystem.IsRunningOnAzurePipelines)
 {
     buildId = BuildSystem.AzurePipelines.Environment.Build.Id.ToString();
-    branchName = BuildSystem.AzurePipelines.Environment.Repository.SourceBranch;
+    fullBranchName = BuildSystem.AzurePipelines.Environment.Repository.SourceBranch;
+    if(fullBranchName.StartsWith("refs/heads/main"))
+        branchName = "main";
+    else if(fullBranchName.StartsWith("refs/heads/release"))
+        branchName = "release";
+    else if(fullBranchName.StartsWith("refs/heads/develop"))
+        branchName = "develop";
+    else
+        branchName = "feature";
 }
 
-if(branchName.StartsWith("refs/heads/main"))
+switch(branchName) {
+    case "main":
         IsRelease = true;
         configuration = "Release";
         versionSuffix = $"";
-if(branchName.StartsWith("refs/heads/release"))
+        break;
+    case "release":
         IsRelease = true;
         configuration = "Release";
         versionSuffix = $"prerelease.{buildId}";
-if(branchName.StartsWith("refs/heads/develop"))
+        break;
+    case "develop":
         IsRelease = false;
         configuration = "Debug";
         versionSuffix = $"alpha.{buildId}";
         break;
+    default:
+        IsRelease = false;
+        configuration = "Debug";
+        versionSuffix = $"local.{buildId}";
+        break;
+}
 
 Task("Setup")
   .Does(() => {
