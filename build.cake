@@ -51,7 +51,6 @@ Task("Setup")
     Information($"Target is         {target}");
     Information($"Solution is       {solution}");
     Information($"Branch Name is    {branchName}");
-    Information($"Solution is       {solution}");
     Information($"Configuration is  {configuration}");
     Information($"Version Suffix is {versionSuffix}");
     Information($"Build Id is       {buildId}");
