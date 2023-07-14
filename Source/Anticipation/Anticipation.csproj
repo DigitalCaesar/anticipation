@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package Settings">
+    <PackageId>Anticipation</PackageId>
+    <Title>Anticipation</Title>
+    <Summary>Anticipation is a library to promote proactive error management over reactive exception handling.</Summary>
+    <Description>
+      Anticipation is a library to promote proactive error management over reactive exception handling.
+      Anticipation include an Error type for capturing issues raised by your code, a collection type for immutable lists of Errors, and a converter for converting exceptions into Errors.
+    </Description>
+    <PackageTags>Errors;Error;Error Handling;Error Handling Strategy;Meaningful Errors;</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Release All" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Digital Caesar LLC.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+</Project>
