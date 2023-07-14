@@ -5,7 +5,6 @@
 var target = Argument("target", "Default");
 string solution = Argument("solution", "./Source/Anticipation.sln");
 string branchName = Argument("branchName", "local");
-string fullBranchName = Argument("fullBranchName", "local");
 
 
 string buildId = "0";
@@ -21,7 +20,7 @@ string PACKAGE_OUTPUT_DIR = $"{ARTIFACT_OUTPUT_DIR}/package";
 if(BuildSystem.IsRunningOnAzurePipelines)
 {
     buildId = BuildSystem.AzurePipelines.Environment.Build.Id.ToString();
-    fullBranchName = BuildSystem.AzurePipelines.Environment.Repository.SourceBranch;
+    var fullBranchName = BuildSystem.AzurePipelines.Environment.Repository.SourceBranch;
     if(fullBranchName.StartsWith("refs/heads/main"))
         branchName = "main";
     else if(fullBranchName.StartsWith("refs/heads/release"))
