@@ -1,0 +1,66 @@
+<Project>
+  <PropertyGroup Label="Locations">
+    <RepositoryDirectory>$(MSBuildThisFileDirectory)</RepositoryDirectory>
+    <BuildToolsDirectory>$(RepositoryDirectory)build\</BuildToolsDirectory>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Core Project Identification">
+    <IsTestProject>$(MSBuildProjectName.Contains("Test"))</IsTestProject>
+    <IsSampleProject>$(MSBuildProjectName.Contains("Sample"))</IsSampleProject>
+    <IsCoreProject Condition="$(IsTestProject) Or $(IsSampleProject)">False</IsCoreProject>
+    <IsCoreProject Condition="'$(IsCoreProject)' == ''">True</IsCoreProject>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Language Options">
+    <LangVersion>11.0</LangVersion>
+    <NullableReferenceTypes>true</NullableReferenceTypes>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Version">
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <BuildId>0</BuildId>
+    <AssemblyVersion>$(VersionPrefix).$(BuildId)</AssemblyVersion>
+    <FileVersion>$(VersionPrefix).$(BuildId)</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package Settings">
+    <Authors>Eric A DeCesare</Authors>
+    <Company>Digital Caesar LLC</Company>
+    <Product>Digital Caesar - Digital Results</Product>
+    <Copyright>Copyright © Digital Caesar LLC.  All rights reserved.</Copyright>
+    <NeutralLanguage>en</NeutralLanguage>
+    <CommonTags>Digital Caesar;Digital Caesar Framework;Domain Driven Design;</CommonTags>
+    <PackageReleaseNotes>https://github.com/DigitalCaesar/anticipation/releases/</PackageReleaseNotes>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)bin\Packages</PackageOutputPath>
+    <PackageProjectUrl>https://digitalcaesar.com/products/anticipation/</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>images\icon.png</PackageIcon>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/DigitalCaesar/anticipation</RepositoryUrl>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup Label="ContinuousIntegration" Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsCoreProject)' == true">
+    <IsPackable>true</IsPackable>
+    <IsPublishable>true</IsPublishable>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsCoreProject)' == false">
+    <IsPackable>false</IsPackable>
+    <IsPublishable>false</IsPublishable>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+</Project>
