@@ -37,32 +37,17 @@ public class Error_Test
     }
 
     [Fact]
-    public void Error_Null_Test()
+    public void Error_Unknown_Test()
     {
         // Arrange
         Error TestObject;
 
         // Act
-        TestObject = Error.NullValue;
+        TestObject = Error.Unknown;
 
         // Assert
-        TestObject.Code.Should().Be("Error.NullValue");
-        TestObject.Message.Should().Be("The specified result value is null.");
-        TestObject.ErrorType.Should().Be(ErrorType.Warning);
-    }
-
-    [Fact]
-    public void Error_Validation_Test()
-    {
-        // Arrange
-        Error TestObject;
-
-        // Act
-        TestObject = Error.Validation;
-
-        // Assert
-        TestObject.Code.Should().Be("ValidationError");
-        TestObject.Message.Should().Be("A validation error occurred.");
+        TestObject.Code.Should().Be("Unknown");
+        TestObject.Message.Should().Be("An unknown error occurred");
         TestObject.ErrorType.Should().Be(ErrorType.Warning);
     }
     #endregion
