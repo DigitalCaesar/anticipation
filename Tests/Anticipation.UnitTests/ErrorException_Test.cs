@@ -57,8 +57,8 @@ public class ErrorException_Test
     }
 
     [Theory]
-    [InlineData("TestDescription", "TestDescription")]
-    public void Property_Description_Test(string testValue, string expectedValue)
+    [InlineData("TestMessage", "TestMessage")]
+    public void Property_Message_Test(string testValue, string expectedValue)
     {
         // Arrange
         ExceptionError TestObject;
@@ -67,7 +67,7 @@ public class ErrorException_Test
         TestObject = new(cDefaultErrorCode, testValue, GetException());
 
         // Assert
-        TestObject.Description.Should().Be(expectedValue);
+        TestObject.Message.Should().Be(expectedValue);
     }
     [Fact]
     public void Property_ErrorType_Test()

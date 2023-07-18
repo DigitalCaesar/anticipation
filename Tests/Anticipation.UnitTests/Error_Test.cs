@@ -32,7 +32,7 @@ public class Error_Test
 
         // Assert
         TestObject.Code.Should().BeEmpty();
-        TestObject.Description.Should().BeEmpty();
+        TestObject.Message.Should().BeEmpty();
         TestObject.ErrorType.Should().Be(ErrorType.Warning);
     }
 
@@ -47,7 +47,7 @@ public class Error_Test
 
         // Assert
         TestObject.Code.Should().Be("Error.NullValue");
-        TestObject.Description.Should().Be("The specified result value is null.");
+        TestObject.Message.Should().Be("The specified result value is null.");
         TestObject.ErrorType.Should().Be(ErrorType.Warning);
     }
 
@@ -62,7 +62,7 @@ public class Error_Test
 
         // Assert
         TestObject.Code.Should().Be("ValidationError");
-        TestObject.Description.Should().Be("A validation error occurred.");
+        TestObject.Message.Should().Be("A validation error occurred.");
         TestObject.ErrorType.Should().Be(ErrorType.Warning);
     }
     #endregion
@@ -124,8 +124,8 @@ public class Error_Test
     }
 
     [Theory]
-    [InlineData("TestDescription", "TestDescription")]
-    public void Property_Description_Test(string testValue, string expectedValue)
+    [InlineData("TestMessage", "TestMessage")]
+    public void Property_Message_Test(string testValue, string expectedValue)
     {
         // Arrange
         Error TestObject;
@@ -134,7 +134,7 @@ public class Error_Test
         TestObject = new(cDefaultErrorCode, testValue);
 
         // Assert
-        TestObject.Description.Should().Be(expectedValue);
+        TestObject.Message.Should().Be(expectedValue);
     }
     [Theory]
     [InlineData(ErrorType.Warning)]

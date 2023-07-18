@@ -13,18 +13,6 @@ public class Error
     /// A default empty error
     /// </summary>
     public static readonly Error None = new(string.Empty, string.Empty);
-    /// <summary>
-    /// A null result error
-    /// </summary>
-    public static readonly Error NullValue = new(
-        "Error.NullValue", 
-        "The specified result value is null.");
-    /// <summary>
-    /// A error in validation
-    /// </summary>
-    public static readonly Error Validation = new(
-        "ValidationError",
-        "A validation error occurred.");
 
     /// <summary>
     /// A unique identifier for the error
@@ -33,7 +21,7 @@ public class Error
     /// <summary>
     /// A message explaining the error
     /// </summary>
-    public string Description { get; }
+    public string Message { get; }
     /// <summary>
     /// The type of underlying issue that trigger the error
     /// </summary>
@@ -41,15 +29,15 @@ public class Error
 
 
     /// <summary>
-    /// Default constructor requires an error code and description
+    /// Default constructor requires an error code and message
     /// </summary>
     /// <param name="code">the unique identifier of the error</param>
-    /// <param name="description">the message explaining the error</param>
+    /// <param name="message">the message explaining the error</param>
     /// <param name="errorType">the type of underlying issue that triggered the error</param>
-    public Error(string code, string description, ErrorType errorType = ErrorType.Warning)
+    public Error(string code, string message, ErrorType errorType = ErrorType.Warning)
     {
         Code = code;
-        Description = description;
+        Message = message;
         ErrorType = errorType;
     }
 }
