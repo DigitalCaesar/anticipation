@@ -7,8 +7,7 @@
   <PropertyGroup Label="Core Project Identification">
     <IsTestProject>$(MSBuildProjectName.Contains("Test"))</IsTestProject>
     <IsSampleProject>$(MSBuildProjectName.Contains("Sample"))</IsSampleProject>
-    <IsCoreProject Condition="$(IsTestProject)">False</IsCoreProject>
-    <IsCoreProject Condition="$(IsSampleProject)">False</IsCoreProject>
+    <IsCoreProject Condition="$(IsTestProject) Or $(IsSampleProject)">False</IsCoreProject>
     <IsCoreProject Condition="'$(IsCoreProject)' == ''">True</IsCoreProject>
   </PropertyGroup>
 
@@ -58,5 +57,10 @@
     <IsPackable>true</IsPackable>
     <IsPublishable>true</IsPublishable>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsCoreProject)' == false">
+    <IsPackable>false</IsPackable>
+    <IsPublishable>false</IsPublishable>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
   </PropertyGroup>
 </Project>
