@@ -5,7 +5,7 @@ namespace DigitalResults.UnitTests.Errors;
 
 public class ErrorCollection_Test
 {
-
+    #region Test Data
     public static IEnumerable<object[]> GetError()
     {
         yield return new object[] { new Error("Test", "Test Error") };
@@ -28,7 +28,9 @@ public class ErrorCollection_Test
         yield return new object[] { new List<Error> { new Error("Test", "Test Error") }, true };
         yield return new object[] { new List<Error> { new Error("Test1", "First Test Error"), new Error("Test2", "Second Test Error") }, false };
     }
+    #endregion
 
+    #region Constructor Tests
     [Fact]
     public void Constructor_Test()
     {
@@ -69,6 +71,9 @@ public class ErrorCollection_Test
         // Assert
         TestObject.Should().NotBeNull();
     }
+    #endregion
+
+    #region Methods
 
     [Theory]
     [MemberData(nameof(GetErrorsForEmptyTest))]
@@ -97,4 +102,5 @@ public class ErrorCollection_Test
         // Assert
         TestObject.IsSingle.Should().Be(expectedValue);
     }
+    #endregion
 }

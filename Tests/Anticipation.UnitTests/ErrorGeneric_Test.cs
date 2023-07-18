@@ -4,10 +4,23 @@ using FluentAssertions;
 namespace DigitalResults.UnitTests.Errors;
 public class ErrorGeneric_Test
 {
+    #region Test Data
     private const string cDefaultErrorCode = "TestError";
     private const string cDefaultErrorMessage = "Test Error Message";
     private const string cDefaultErrorData = "Test Data";
+    public static IEnumerable<object[]> GetStringValues()
+    {
+        yield return new object[] { "Test Code" };
+        yield return new object[] { string.Empty };
+    }
+    public static IEnumerable<object[]> GetExceptionValues()
+    {
+        yield return new object[] { new Exception() };
+        yield return new object[] { new ArgumentException() };
+    }
+    #endregion
 
+    #region Constructor Tests
     [Fact]
     public void Constructor_Default_Test()
     {
@@ -32,9 +45,12 @@ public class ErrorGeneric_Test
         // Assert
         TestObject.Should().NotBeNull();
     }
+    #endregion
+
+    #region Property Tests
     [Theory]
-    [InlineData("TestCode", "TestCode")]
-    public void Property_Data_Test(string testValue, string expectedValue)
+    [MemberData(nameof(GetStringValues))]
+    public void Property_Data_String_Test(string testValue)
     {
         // Arrange
         Error<string> TestObject;
@@ -43,7 +59,20 @@ public class ErrorGeneric_Test
         TestObject = new(cDefaultErrorCode, cDefaultErrorMessage, testValue);
 
         // Assert
-        TestObject.Data.Should().Be(expectedValue);
+        TestObject.Data.Should().Be(testValue);
     }
+    [Theory]
+    [MemberData(nameof(GetExceptionValues))]
+    public void Property_Data_Test(Exception testValue)
+    {
+        // Arrange
+        Error<Exception> TestObject;
 
+        // Act
+        TestObject = new(cDefaultErrorCode, cDefaultErrorMessage, testValue);
+
+        // Assert
+        TestObject.Data.Should().Be(testValue);
+    }
+    #endregion
 }

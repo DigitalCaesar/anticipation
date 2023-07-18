@@ -4,13 +4,16 @@ using FluentAssertions;
 namespace DigitalResults.UnitTests.Errors;
 public class ErrorException_Test
 {
+    #region Test Data
     private const string cDefaultErrorCode = "TestError";
     private const string cDefaultErrorMessage = "Test Error Message";
-
     private static Exception GetException()
     {
         return new("Test Exception for Unit Testing");
     }
+    #endregion
+
+    #region Constructor Tests
 
     [Fact]
     public void Constructor_ErrorOnly_Test()
@@ -36,6 +39,9 @@ public class ErrorException_Test
         // Assert
         TestObject.Should().NotBeNull();
     }
+    #endregion
+
+    #region Property Tests
     [Theory]
     [InlineData("TestCode", "TestCode")]
     public void Property_Code_Test(string testValue, string expectedValue)
@@ -88,5 +94,5 @@ public class ErrorException_Test
         // Assert
         TestObject.Data.Should().Be(TestFailure);
     }
-
+    #endregion
 }

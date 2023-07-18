@@ -5,9 +5,22 @@ namespace DigitalResults.UnitTests.Errors;
 
 public class Error_Test
 {
+    #region Test Values
     private const string cDefaultErrorCode = "TestError";
     private const string cDefaultErrorMessage = "Test Error Message";
+    public static IEnumerable<object[]> GetPartialConstructorValues()
+    {
+        yield return new object[] { "Test", "Test Error" };
+        yield return new object[] { string.Empty, string.Empty };
+    }
+    public static IEnumerable<object[]> GetFullConstructorValues()
+    {
+        yield return new object[] { "TestCode", "Test Error Message", ErrorType.Exception };
+        yield return new object[] { string.Empty, string.Empty, ErrorType.Validation };
+    }
+    #endregion
 
+    #region Static Types
     [Fact]
     public void Error_None_Test()
     {
@@ -52,7 +65,9 @@ public class Error_Test
         TestObject.Description.Should().Be("A validation error occurred.");
         TestObject.ErrorType.Should().Be(ErrorType.Warning);
     }
+    #endregion
 
+    #region Constructor Tests
     [Fact]
     public void Constructor_Default_Test()
     {
@@ -65,18 +80,35 @@ public class Error_Test
         // Assert
         TestObject.Should().NotBeNull();
     }
-    [Fact]
-    public void Constructor_Full_Test()
+    [Theory]
+    [MemberData(nameof(GetPartialConstructorValues))]
+    public void Constructor_Partial_Test(string code, string message)
     {
         // Arrange
         Error TestObject;
 
         // Act
-        TestObject = new(cDefaultErrorCode, cDefaultErrorMessage, ErrorType.Exception);
+        TestObject = new(code, message);
 
         // Assert
         TestObject.Should().NotBeNull();
     }
+    [Theory]
+    [MemberData(nameof(GetFullConstructorValues))]
+    public void Constructor_Full_Test(string code, string message, ErrorType type)
+    {
+        // Arrange
+        Error TestObject;
+
+        // Act
+        TestObject = new(code, message, type);
+
+        // Assert
+        TestObject.Should().NotBeNull();
+    }
+    #endregion
+
+    #region Property Tests
     [Theory]
     [InlineData("TestCode", "TestCode")]
     public void Property_Code_Test(string testValue, string expectedValue)
@@ -131,4 +163,5 @@ public class Error_Test
         // Assert
         TestObject.ErrorType.Should().Be(ErrorType.Warning);
     }
+    #endregion
 }
