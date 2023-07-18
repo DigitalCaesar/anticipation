@@ -12,14 +12,14 @@ public class Error<EType> : Error
     public EType Data { get; }
 
     /// <summary>
-    /// Default constructor requires an error code and description
+    /// Default constructor requires an error code and message
     /// </summary>
     /// <param name="code">the unique identifier of the error</param>
-    /// <param name="description">the message explaining the error</param>
+    /// <param name="message">the message explaining the error</param>
     /// <param name="data">the cause of the error</param>
     /// <param name="errorType">the type of underlying issue that triggered the error</param>
-    public Error(string code, string description, EType data, ErrorType errorType = ErrorType.Warning)
-        : base(code, description, errorType)
+    public Error(string code, string message, EType data, ErrorType errorType = ErrorType.Warning)
+        : base(code, message, errorType)
     {
         Data = data;
     }

@@ -8,7 +8,7 @@ public class ErrorStrategy : IStrategy
         {
             var average = AverageCalculatorWithErrors.Calculate(values);
             if (average.Error != null)
-                Console.WriteLine(average.Error.Description);
+                Console.WriteLine(average.Error.Message);
             else
             Console.WriteLine($"The average is {average.Value}");
         }

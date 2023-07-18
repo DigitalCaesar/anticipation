@@ -32,37 +32,22 @@ public class Error_Test
 
         // Assert
         TestObject.Code.Should().BeEmpty();
-        TestObject.Description.Should().BeEmpty();
+        TestObject.Message.Should().BeEmpty();
         TestObject.ErrorType.Should().Be(ErrorType.Warning);
     }
 
     [Fact]
-    public void Error_Null_Test()
+    public void Error_Unknown_Test()
     {
         // Arrange
         Error TestObject;
 
         // Act
-        TestObject = Error.NullValue;
+        TestObject = Error.Unknown;
 
         // Assert
-        TestObject.Code.Should().Be("Error.NullValue");
-        TestObject.Description.Should().Be("The specified result value is null.");
-        TestObject.ErrorType.Should().Be(ErrorType.Warning);
-    }
-
-    [Fact]
-    public void Error_Validation_Test()
-    {
-        // Arrange
-        Error TestObject;
-
-        // Act
-        TestObject = Error.Validation;
-
-        // Assert
-        TestObject.Code.Should().Be("ValidationError");
-        TestObject.Description.Should().Be("A validation error occurred.");
+        TestObject.Code.Should().Be("Unknown");
+        TestObject.Message.Should().Be("An unknown error occurred");
         TestObject.ErrorType.Should().Be(ErrorType.Warning);
     }
     #endregion
@@ -124,8 +109,8 @@ public class Error_Test
     }
 
     [Theory]
-    [InlineData("TestDescription", "TestDescription")]
-    public void Property_Description_Test(string testValue, string expectedValue)
+    [InlineData("TestMessage", "TestMessage")]
+    public void Property_Message_Test(string testValue, string expectedValue)
     {
         // Arrange
         Error TestObject;
@@ -134,7 +119,7 @@ public class Error_Test
         TestObject = new(cDefaultErrorCode, testValue);
 
         // Assert
-        TestObject.Description.Should().Be(expectedValue);
+        TestObject.Message.Should().Be(expectedValue);
     }
     [Theory]
     [InlineData(ErrorType.Warning)]
